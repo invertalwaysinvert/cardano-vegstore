@@ -7,9 +7,9 @@ import {
   FacebookLoginProvider
 } from 'angularx-social-login';
 import { environment } from './../environments/environment';
-
+import { FormsModule } from '@angular/forms';
 import { LightboxModule } from 'ngx-lightbox';
-
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
@@ -30,9 +30,11 @@ import { WalletRecoverComponent } from './member-area/wallet-recover/wallet-reco
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     LightboxModule,
     AppRoutingModule,
     NgbModule,
+    FormsModule,
     SocialLoginModule
   ],
   providers: [

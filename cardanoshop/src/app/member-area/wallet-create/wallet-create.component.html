@@ -1,1 +1,55 @@
-<p>wallet-create works!</p>
+<div class="container">
+    <form (ngSubmit)="create(modalData)" #walletForm="ngForm">
+        <p class="h2">Wallet creation</p>
+        <div class="form-floating mb-3">
+            <input type="text" [(ngModel)]="wallet.name" required class="form-control" id="walletName" name="walletName" maxlength="255" placeholder="my wallet" #walletName="ngModel">
+            <label for="walletName" class="form-label">Wallet Name</label>
+            <div [hidden]="walletName.valid || walletName.pristine" class="alert alert-danger">
+                Name is required
+              </div>
+        </div>
+    
+          <div class="mb-3">
+            <label for="mnemonic" class="form-label">Mnemonic phrase</label>
+            <textarea class="form-control" [(ngModel)]="wallet.mnemonic" id="mnemonic" name="mnemonic" rows="3" readonly></textarea>
+          </div>
+    
+          <div class="form-floating mb-3">
+            <input type="password" [(ngModel)]="wallet.password" required maxlength="255" class="form-control" id="password" name="password" placeholder="my password">
+            <label for="password" class="form-label">Wallet Password</label>
+            <div [hidden]="walletName.valid || walletName.pristine" class="alert alert-danger">
+                Password is required
+            </div>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input type="password" [(ngModel)]="confirmationPassword" required maxlength="255" class="form-control" id="confirmationPassword" name="confirmationPassword" placeholder="Confirm your password">
+            <label for="confirmationPassword" class="form-label">Confirm the Password</label>
+            <div [hidden]="confirmationPasswordValid" class="alert alert-danger">
+                Password doesn't match
+            </div>
+        </div>
+    
+          <div class="modal-footer">
+            <button type="button" class="btn btn-info" (click)="reset()">Reset</button>
+            <button type="submit" class="btn btn-success" [disabled]="!walletForm.form.valid" (click)="create(modalData)">Create</button>
+          </div>
+    </form>
+</div>
+
+<ng-template #modalData let-modal>
+    <div class="container">
+
+    <div class="mb-3">
+        <label for="confirmationMnemonic" class="form-label">Confirm the mnemonic phrase</label>
+        <textarea class="form-control" [(ngModel)]="confirmationMnemonic" id="mnemonic" name="confirmationMnemonic" rows="3"></textarea>
+        <div [hidden]="confirmationMnemonicValid" class="alert alert-danger">
+            This is bad, please verify your seed phrase otherwise you can't recover this wallet.
+        </div>  
+    </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" (click)="confirmMnemonic()">Confirm</button>
+      </div>
+    </div>
+</ng-template>
