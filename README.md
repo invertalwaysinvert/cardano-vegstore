@@ -1,5 +1,12 @@
+![](https://img.shields.io/badge/Angular-11-informational?style=flat&logo=Angular&logoColor=white&color=fc3903)
+![](https://img.shields.io/badge/Bootstrap-5-informational?style=flat&color=03cafc)
+![](https://img.shields.io/badge/NodeJS-14-informational?style=flat&color=03fc1c)
+![](https://img.shields.io/badge/CardanoWallet-v20210611-informational?style=flat&color=fc03f4)
+
 # Cardano Veg Store 🌽
-Test of concept integration of Cardano wallet and e-commerce website. NodeJs, Angular 12.
+Test of concept integration of Cardano wallet and e-commerce website. NodeJs, Angular 11.
+There are several things to consider in this project, so consider this as reference not a full fledge application. Some concerns about security must be addressed first and we can't be accountable of any misuse of the code.
+The intention of the pet project is to serve as educational purpose.
 
 # Description 💡
 Cardano Veg Store is a template project for e-commerce integration, it mains for simplicity and not tied to proprietary technologies or platforms as much as possible.
