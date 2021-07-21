@@ -1,0 +1,25 @@
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Cardano Shop User Authentication</h4>
+      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p><strong>Always keep your data safe, don't use public computers, backup your seed phrase.</strong></p>
+      
+      <p>All data related to profiles are not stored.
+      </p>
+      <div *ngIf="loggedIn">
+        <img src="{{ user.photoUrl }}">
+        <div>
+          <h4>{{ user.name }}</h4>
+          <p>{{ user.email }}</p>
+        </div>
+      </div>
+
+      <button *ngIf="!loggedIn" class="btn" (click)="signInWithGoogle()">Sign with google</button>
+    </div>
+    <div class="modal-footer" *ngIf="loggedIn">
+      <button *ngIf="loggedIn" type="button" class="btn btn-info" (click)="openMemberArea()">Members</button>
+      <button *ngIf="loggedIn" type="button" class="btn btn-danger" (click)="signOut()">Signout</button>
+    </div>
