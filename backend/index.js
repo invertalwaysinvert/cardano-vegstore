@@ -1,7 +1,8 @@
 const express = require("express");
 const bip39 = require("bip39");
 const path = require("path");
-var cors = require('cors')
+var cors = require('cors');
+const axios = require('axios');
 
 /**
  * App Variables
@@ -13,6 +14,10 @@ var cors = require('cors')
 var corsOptions = {
   origin: 'http://localhost:4200',
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
 }
 
  app.get("/", (req, res) => {
@@ -27,6 +32,21 @@ var corsOptions = {
     const array2 = mnemonic2.split(' ');
     const finalMnemonic = array1.concat(array2);
     res.status(200).send(finalMnemonic);
+  });
+
+  app.get("/network/information", (req, res) => {
+    axios.get(`${process.env.WALLET_SERVER}/v2/network/information`)
+    .then(function (response) {
+      // handle success
+      console.log(response.data);
+      res.status(200).send(response.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
+    .then(function () {
+    });
+
   });
 
   app.listen(port, () => {
