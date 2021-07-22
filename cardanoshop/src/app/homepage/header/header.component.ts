@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SocialAuthService } from 'angularx-social-login';
+import { SessionStorage } from 'src/app/helpers/session-storage';
+import { LoginService } from 'src/app/login.service';
 import { AuthenticateComponent } from '../../authenticate/authenticate.component';
 
 @Component({
@@ -16,15 +18,34 @@ export class HeaderComponent implements OnInit {
   userName: string;
 
   constructor(private modalService: NgbModal, 
+    public environment: SessionStorage,
+    private loginService: LoginService,
     private authService: SocialAuthService,
     private router: Router) {}
 
   ngOnInit(): void {
-    if (localStorage.getItem('userId') != null) {
+    if (this.environment.currentUser != null && localStorage.getItem('userId') != null) {
       console.log('user is logged');
       this.loggedIn = true;
       this.userName = localStorage.getItem('userName');
     }
+    this.authService.authState.subscribe((socialUser) => {
+      if (socialUser && socialUser.email) {
+        this.loggedIn = (socialUser != null);
+        this.loginService.login(socialUser.email)
+          .subscribe(accessToken => {
+            this.environment.currentUser = socialUser.email
+            this.loggedIn = (accessToken != null);
+            localStorage.setItem('userId', socialUser.id);
+            localStorage.setItem('userName', socialUser.name);
+            localStorage.setItem('userEmail', socialUser.email);
+            localStorage.setItem('photoUrl', socialUser.photoUrl);
+          })
+      } else {
+        alert('You are not authorized to see this content.')
+      }
+      
+    });
   }
 
   triggerModal() {

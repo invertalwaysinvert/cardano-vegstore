@@ -4,6 +4,8 @@ import { SocialAuthService } from "angularx-social-login";
 import { SocialUser } from "angularx-social-login";
 import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
 import { Router } from '@angular/router';
+import { SessionStorage } from '../helpers/session-storage';
+import { LoginService } from '../login.service';
 
 @Component({
   selector: 'app-authenticate',
@@ -14,24 +16,35 @@ export class AuthenticateComponent implements OnInit {
 
   constructor(public activeModal: NgbActiveModal,
     private authService: SocialAuthService,
+    private loginService: LoginService,
+    public environment: SessionStorage,
     private router: Router) { }
 
     user: SocialUser;
     loggedIn: boolean;
 
     ngOnInit() {
-      if (localStorage.getItem('userId') != null) {
+      if (this.environment.currentUser != null) {
         console.log('user is logged');
         this.loggedIn = true;
         this.user = new SocialUser();
       }
-      this.authService.authState.subscribe((user) => {
-        this.user = user;
-        this.loggedIn = (user != null);
-        localStorage.setItem('userId', user.id);
-        localStorage.setItem('userName', user.name);
-        localStorage.setItem('userEmail', user.email);
-        localStorage.setItem('photoUrl', user.photoUrl);
+      this.authService.authState.subscribe((socialUser) => {
+        if (socialUser && socialUser.email) {
+          this.user = socialUser;
+          this.loggedIn = (socialUser != null);
+          this.loginService.login(socialUser.email)
+            .subscribe(accessToken => {
+              this.environment.currentUser = socialUser.email
+              localStorage.setItem('userId', socialUser.id);
+              localStorage.setItem('userName', socialUser.name);
+              localStorage.setItem('userEmail', socialUser.email);
+              localStorage.setItem('photoUrl', socialUser.photoUrl);
+            })
+        } else {
+          alert('You are not authorized to see this content.')
+        }
+        
       });
     }
 
@@ -49,6 +62,9 @@ export class AuthenticateComponent implements OnInit {
   }
 
   signOut(): void {
+    this.environment.currentUser = null
+    this.environment.accessToken = null
+    sessionStorage.clear()
     this.authService.signOut();
     ['userId', 'userName', 'userEmail', 'photoUrl'].forEach (function (key) { localStorage.removeItem(key); });
     this.activeModal.dismiss();

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { environment } from './../environments/environment';
+import { SessionStorage } from './helpers/session-storage';
 
 
 @Injectable({
@@ -10,9 +11,11 @@ import { environment } from './../environments/environment';
 })
 export class WalletServiceService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, 
+    public environment: SessionStorage) { }
 
   getMnemonic() {
-    return this.http.get<[String]>(`${environment.node_url}/mnemonic`);
+    let headers = this.environment.headers
+    return this.http.get<[String]>(`${environment.node_url}/mnemonic`, { headers });
   }
 }

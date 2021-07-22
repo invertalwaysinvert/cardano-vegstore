@@ -9,7 +9,7 @@ import {
 import { environment } from './../environments/environment';
 import { FormsModule } from '@angular/forms';
 import { LightboxModule } from 'ngx-lightbox';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
@@ -18,6 +18,8 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { WalletCreateComponent } from './member-area/wallet-create/wallet-create.component';
 import { HeaderComponent } from './homepage/header/header.component';
 import { FooterComponent } from './homepage/footer/footer.component';
+import { AuthInterceptor } from './helpers/auth-interceptor'
+import { SessionStorage } from './helpers/session-storage';
 
 
 @NgModule({
@@ -40,6 +42,7 @@ import { FooterComponent } from './homepage/footer/footer.component';
     SocialLoginModule
   ],
   providers: [
+    SessionStorage,
     {
       provide: 'SocialAuthServiceConfig',
       useValue: {
@@ -60,7 +63,8 @@ import { FooterComponent } from './homepage/footer/footer.component';
           console.error(err);
         }
       } as SocialAuthServiceConfig,
-    }
+    },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
