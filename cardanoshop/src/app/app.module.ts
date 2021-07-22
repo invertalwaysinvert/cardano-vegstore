@@ -16,7 +16,8 @@ import { AuthenticateComponent } from './authenticate/authenticate.component';
 import { MemberAreaComponent } from './member-area/member-area.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { WalletCreateComponent } from './member-area/wallet-create/wallet-create.component';
-import { WalletRecoverComponent } from './member-area/wallet-recover/wallet-recover.component';
+import { HeaderComponent } from './homepage/header/header.component';
+import { FooterComponent } from './homepage/footer/footer.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { WalletRecoverComponent } from './member-area/wallet-recover/wallet-reco
     MemberAreaComponent,
     HomepageComponent,
     WalletCreateComponent,
-    WalletRecoverComponent
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

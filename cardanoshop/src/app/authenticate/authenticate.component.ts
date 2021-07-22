@@ -20,10 +20,18 @@ export class AuthenticateComponent implements OnInit {
     loggedIn: boolean;
 
     ngOnInit() {
+      if (localStorage.getItem('userId') != null) {
+        console.log('user is logged');
+        this.loggedIn = true;
+        this.user = new SocialUser();
+      }
       this.authService.authState.subscribe((user) => {
         this.user = user;
         this.loggedIn = (user != null);
-        console.log(user);
+        localStorage.setItem('userId', user.id);
+        localStorage.setItem('userName', user.name);
+        localStorage.setItem('userEmail', user.email);
+        localStorage.setItem('photoUrl', user.photoUrl);
       });
     }
 
@@ -42,6 +50,8 @@ export class AuthenticateComponent implements OnInit {
 
   signOut(): void {
     this.authService.signOut();
+    ['userId', 'userName', 'userEmail', 'photoUrl'].forEach (function (key) { localStorage.removeItem(key); });
+    this.activeModal.dismiss();
   }
 
 }

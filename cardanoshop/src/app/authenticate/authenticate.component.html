@@ -7,7 +7,7 @@
     <div class="modal-body">
       <p><strong>Always keep your data safe, don't use public computers, backup your seed phrase.</strong></p>
       
-      <p>All data related to profiles are not stored.
+      <p>All data related of profiles are not stored.
       </p>
       <div *ngIf="loggedIn">
         <img src="{{ user.photoUrl }}">
@@ -17,7 +17,7 @@
         </div>
       </div>
 
-      <button *ngIf="!loggedIn" class="btn" (click)="signInWithGoogle()">Sign with google</button>
+      <button *ngIf="!loggedIn" class="btn btn-info fa fa-google" (click)="signInWithGoogle()"><span class="ml-1">Sign with google</span></button>
     </div>
     <div class="modal-footer" *ngIf="loggedIn">
       <button *ngIf="loggedIn" type="button" class="btn btn-info" (click)="openMemberArea()">Members</button>

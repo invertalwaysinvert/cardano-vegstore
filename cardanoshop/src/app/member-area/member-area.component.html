@@ -1,7 +1,10 @@
-<p>
+<app-header></app-header>
+<div class="container fill">
+  <p>
     <ngb-alert [dismissible]="false">
-      <strong>Warning!</strong> Always backup your seedphrase and do not open in shared/public computer.
+      <strong>Not found!</strong> You have no wallet created already, please recover/create your wallet. Test Net address only.
     </ngb-alert>
   </p>
-<button class="btn btn-info" (click)="createWallet()">Create Wallet</button>
-<button class="btn btn-info" (click)="recoverWallet()">Recover Wallet</button>
+<button class="btn btn-info" (click)="createWallet()">Create/Recover Wallet</button>
+</div>
+<app-footer></app-footer>

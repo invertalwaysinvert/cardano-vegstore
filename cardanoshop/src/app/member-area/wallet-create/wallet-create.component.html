@@ -1,4 +1,5 @@
-<div class="container">
+<app-header></app-header>
+<div class="container fill">
     <form (ngSubmit)="create(modalData)" #walletForm="ngForm">
         <p class="h2">Wallet creation</p>
         <div class="form-floating mb-3">
@@ -36,6 +37,7 @@
           </div>
     </form>
 </div>
+<app-footer></app-footer>
 
 <ng-template #modalData let-modal>
     <div class="container">
