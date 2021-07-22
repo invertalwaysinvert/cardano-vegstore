@@ -8,6 +8,10 @@ const axios = require('axios');
  * App Variables
  */
 
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
+
 const app = express();
 const port = process.env.PORT || "80";
 
@@ -18,9 +22,6 @@ var corsOptions = {
   optionsSuccessStatus: 200
 }
 
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config();
-}
 
 app.get('/', (req,res) => {
   res.sendFile(process.cwd()+"/public/index.html");
