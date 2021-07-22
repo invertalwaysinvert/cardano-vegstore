@@ -11,6 +11,8 @@ const axios = require('axios');
 const app = express();
 const port = process.env.PORT || "80";
 
+app.use(express.static(process.cwd()+"/public/", { maxAge: "365d" }));
+
 var corsOptions = {
   origin: process.env.FRONT_END,
   optionsSuccessStatus: 200
@@ -20,7 +22,11 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 
-app.get("/", (req, res) => {
+app.get('/', (req,res) => {
+  res.sendFile(process.cwd()+"/public/index.html");
+});
+
+app.get("/hearthbeat", (req, res) => {
   res.status(200).send("WHATABYTE: Food For Devs");
 });
 
