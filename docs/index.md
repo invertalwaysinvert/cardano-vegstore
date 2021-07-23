@@ -58,6 +58,15 @@ Your backend is up and running to accept requests, now open another terminal wit
 If everything is ok you can see the Cardano Veg Store webpage like that:
 ![cardano veg store page](https://raw.githubusercontent.com/cheffNFT/cardano-vegstore/main/docs/screen1.png)
 
+### Reference and useful links
+
+This is a list of useful content to help you understand the technology in this project.
+
+ 1. [Angular tour of heroes](https://angular.io/tutorial)
+ 2. [Cardano wallet API docs](https://input-output-hk.github.io/cardano-wallet/api/edge/#tag/Wallets)
+ 3. [Angular Bootstrap](https://ng-bootstrap.github.io/#/home)
+ 4. [BIP39 library](https://www.npmjs.com/package/bip39)
+ 5. [JSON Webtokens](https://www.npmjs.com/package/jsonwebtoken)
 
 ### Support or Contact
 
