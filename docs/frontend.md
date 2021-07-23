@@ -1,5 +1,5 @@
 ---
-title: PAGE TITLE HERE
+title: Front End documentation
 layout: template
 filename: frontend.md
 ---
