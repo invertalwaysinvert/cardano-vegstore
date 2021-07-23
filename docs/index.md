@@ -1,3 +1,9 @@
+---
+title: Index
+layout: template
+filename: index
+--- 
+
 ## Welcome to Cardano Vegstore
 
 Welcome! 
