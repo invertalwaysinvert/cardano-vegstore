@@ -5,7 +5,7 @@ import { SocialUser } from "angularx-social-login";
 import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
 import { Router } from '@angular/router';
 import { SessionStorage } from '../helpers/session-storage';
-import { LoginService } from '../login.service';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-authenticate',
@@ -21,7 +21,7 @@ export class AuthenticateComponent implements OnInit {
     private router: Router) { }
 
     user: SocialUser;
-    loggedIn: boolean;
+    loggedIn: boolean = false;
 
     ngOnInit() {
       if (this.environment.currentUser != null) {

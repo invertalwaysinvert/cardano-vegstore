@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SocialAuthService } from 'angularx-social-login';
 import { SessionStorage } from 'src/app/helpers/session-storage';
-import { LoginService } from 'src/app/login.service';
+import { LoginService } from 'src/app/services/login.service';
 import { AuthenticateComponent } from '../../authenticate/authenticate.component';
 
 @Component({
@@ -14,7 +14,7 @@ import { AuthenticateComponent } from '../../authenticate/authenticate.component
 export class HeaderComponent implements OnInit {
 
   closeModal: string;
-  loggedIn: boolean;
+  loggedIn: boolean = false;
   userName: string;
 
   constructor(private modalService: NgbModal, 

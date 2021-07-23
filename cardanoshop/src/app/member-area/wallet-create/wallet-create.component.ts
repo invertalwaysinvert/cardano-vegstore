@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Wallet } from 'src/app/wallet';
-import { WalletServiceService } from 'src/app/wallet-service.service';
+import { NetworkInformation } from 'src/app/services/network-information';
+import { Wallet } from 'src/app/services/wallet';
+import { WalletService } from 'src/app/services/wallet.service';
 
 @Component({
   selector: 'app-wallet-create',
@@ -16,7 +17,7 @@ export class WalletCreateComponent implements OnInit {
   confirmationMnemonicValid: Boolean = true
   wallet = new Wallet()
 
-  constructor(private walletService: WalletServiceService,
+  constructor(private walletService: WalletService,
     private modalService: NgbModal) { }
 
   ngOnInit(): void {

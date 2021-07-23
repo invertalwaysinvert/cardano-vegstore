@@ -1,10 +1,33 @@
 <app-header></app-header>
 <div class="container fill">
-  <p>
-    <ngb-alert [dismissible]="false">
-      <strong>Not found!</strong> You have no wallet created already, please recover/create your wallet. Test Net address only.
-    </ngb-alert>
-  </p>
-<button class="btn btn-info" (click)="createWallet()">Create/Recover Wallet</button>
+  <div *ngIf="wallet == null">
+    <p>
+      <ngb-alert [dismissible]="false">
+        <strong>Not found!</strong> You have no wallet created already, please recover/create your wallet. Test Net address only.
+      </ngb-alert>
+    </p>
+    <p>
+      <button class="btn btn-info" (click)="createWallet()">Create/Recover Wallet</button>
+    </p>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="{{ user.photoUrl }}" alt="User picture">
+        <div class="card-body">
+          <p class="card-text">{{ user.email }}</p>
+          <h4>{{ user.name }}</h4>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-header">
+          Network Information
+        </div>
+        <app-network-information></app-network-information>
+      </div>
+    </div>
+  </div>
 </div>
 <app-footer></app-footer>
