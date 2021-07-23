@@ -1,10 +1,5 @@
 ## Welcome to Cardano Vegstore
 
-  
-{% for page in site.pages %}
-    <a href={{ page.filename }}>{{ page.title }}</a>
-{% endfor %}
-
 Welcome! 
 😀This is our project document pages for Cardano Vegstore, we explain technically how it works, what are the main parts and how can you by your own means, create your own Cardano enginered app! 
 Isn't great? Yes but remember, there are several things to be concerned, let's not forget that:
