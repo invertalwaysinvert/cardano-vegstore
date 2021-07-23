@@ -1,6 +1,7 @@
 ---
 title: Front End documentation
 layout: template
-filename: frontend.md
+filename: frontend
 ---
+
 # Front end documentation
