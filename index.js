@@ -88,6 +88,7 @@ app.post("/wallets", authenticateJWT, (req, res) => {
     'Content-Type': 'application/json'
   }})
   .then(function (response) {
+    console.log('wallet created'+response.data.id)
     res.status(200).send(response.data);
   }).catch(function (error) {
     console.log(error);

@@ -25,7 +25,7 @@
           </div>
     
           <div class="form-floating mb-3">
-            <input type="password" [(ngModel)]="wallet.password" required maxlength="255" class="form-control" id="password" name="password" placeholder="my password">
+            <input type="password" [(ngModel)]="wallet.password" required maxlength="255" class="form-control" id="password" name="password" placeholder="my password" minlength="10">
             <label for="password" class="form-label">Wallet Password</label>
             <div [hidden]="walletName.valid || walletName.pristine" class="alert alert-danger">
                 Password is required

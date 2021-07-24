@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { NetworkInformation } from 'src/app/services/network-information';
 import { Wallet } from 'src/app/services/wallet';
@@ -20,6 +21,7 @@ export class WalletCreateComponent implements OnInit {
   recoveryMode = false
 
   constructor(private walletService: WalletService,
+    private router: Router,
     private modalService: NgbModal) { }
 
   ngOnInit(): void {
@@ -72,8 +74,18 @@ export class WalletCreateComponent implements OnInit {
   confirmMnemonic() {
     this.confirmationMnemonicValid = (JSON.stringify(this.mnemonics) == JSON.stringify(this.confirmationMnemonic))
     if (this.confirmationMnemonicValid) {
-      this.modalService.dismissAll()
-      console.log('ready for creation')
+      var mnemonicList = this.mnemonics.map((item) => item.word)
+      this.wallet.mnemonic = mnemonicList as [string]
+      this.walletService.createWallet(this.wallet).subscribe(
+        data => {
+          this.modalService.dismissAll()
+          this.router.navigate(['members']);
+          console.log('success', data)
+        },
+        error => {
+          alert(error.data)
+          console.log('oops', error)}
+      );      
     }
   }
 
