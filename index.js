@@ -1,10 +1,10 @@
 const express = require("express");
 const jwt = require('jsonwebtoken');
-const bip39 = require("bip39");
+const utils = require('./backend/utils')
 const path = require("path");
 var cors = require('cors');
 const axios = require('axios');
-bip39.setDefaultWordlist('english');
+
 /**
  * App Variables
  */
@@ -18,11 +18,9 @@ const app = express();
 const port = process.env.PORT || "80";
 
 app.use(express.static(process.cwd()+"/public/", { maxAge: "365d" }));
-
-var corsOptions = {
-  origin: process.env.FRONT_END,
-  optionsSuccessStatus: 200
-}
+app.use(express.urlencoded({extended: true}));
+ // To parse the incoming requests with JSON payloads
+app.use(express.json());
 
 app.use(cors({origin: [
   'http://127.0.0.1',
@@ -55,12 +53,8 @@ app.post("/login", (req, res) => {
 });
 
 app.get("/mnemonic", authenticateJWT, (req, res) => {
-  const mnemonic1 = bip39.generateMnemonic();
-  const mnemonic2 = bip39.generateMnemonic();
-  const array1 = mnemonic1.split(' ');
-  const array2 = mnemonic2.split(' ');
-  const finalMnemonic = array1.concat(array2);
-  res.status(200).send(finalMnemonic);
+  var words = utils.generateRandomMnemonic(15, utils.wordList);
+  res.status(200).send(words);
 });
 
 app.post("/seed", authenticateJWT, (req, res) => {
@@ -84,15 +78,26 @@ app.post("/validatemnemonic", authenticateJWT, (req, res) => {
     });
 });
 
+app.post("/wallets", authenticateJWT, (req, res) => {
+  var postData = req.body;
+  axios.post(`${process.env.WALLET_SERVER}/v2/wallets`, postData, { headers: {
+    'Content-Type': 'application/json'
+  }})
+  .then(function (response) {
+    res.status(200).send(response.data);
+  }).catch(function (error) {
+    console.log(error);
+    res.status(500).send(error);
+  })
+});
+
 app.get("/network/information", authenticateJWT, (req, res) => {
   axios.get(`${process.env.WALLET_SERVER}/v2/network/information`)
   .then(function (response) {
-    // handle success
-    console.log(response.data);
     res.status(200).send(response.data);
   })
   .catch(function (error) {
-    console.log(error);
+    res.status(500).send(error);
   })
   .then(function () {
   });

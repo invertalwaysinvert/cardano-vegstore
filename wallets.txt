@@ -1,0 +1,146 @@
+request
+{
+  "name": "Jose Wallet",
+  "mnemonic_sentence": 
+  [
+  "abandon", "abandon",
+  "cause",   "abandon",
+  "abandon", "dose",
+  "abandon", "abandon",
+  "claw",    "abandon",
+  "abandon", "lab",
+  "abandon", "able",
+  "cake"
+],
+  "passphrase": "Cardano123",
+  "address_pool_gap": 20
+}
+
+response
+{
+    "passphrase": {
+        "last_updated_at": "2021-07-23T23:27:14.222939848Z"
+    },
+    "address_pool_gap": 20,
+    "state": {
+        "status": "syncing",
+        "progress": {
+            "quantity": 0,
+            "unit": "percent"
+        }
+    },
+    "balance": {
+        "reward": {
+            "quantity": 0,
+            "unit": "lovelace"
+        },
+        "total": {
+            "quantity": 0,
+            "unit": "lovelace"
+        },
+        "available": {
+            "quantity": 0,
+            "unit": "lovelace"
+        }
+    },
+    "name": "Jose Wallet",
+    "delegation": {
+        "next": [],
+        "active": {
+            "status": "not_delegating"
+        }
+    },
+    "id": "b429e59870a24074d48a0b8689ba2e76ee8ebd85",
+    "tip": {
+        "height": {
+            "quantity": 0,
+            "unit": "block"
+        },
+        "time": "2017-09-23T21:44:51Z",
+        "epoch_number": 0,
+        "absolute_slot_number": 0,
+        "slot_number": 0
+    },
+    "assets": {
+        "total": [],
+        "available": []
+    }
+}
+
+
+------
+wallet 2
+
+{
+  "name": "Jose Wallet 2",
+  "mnemonic_sentence": 
+  [
+    "ostrich",
+    "symbol",
+    "athlete",
+    "push",
+    "chat",
+    "wasp",
+    "alarm",
+    "crash",
+    "cannon",
+    "frost",
+    "boss",
+    "lemon",
+    "door",
+    "worth",
+    "someone"
+],
+  "passphrase": "Cardano123",
+  "address_pool_gap": 20
+}
+
+{
+    "passphrase": {
+        "last_updated_at": "2021-07-24T11:31:09.440026429Z"
+    },
+    "address_pool_gap": 20,
+    "state": {
+        "status": "syncing",
+        "progress": {
+            "quantity": 0,
+            "unit": "percent"
+        }
+    },
+    "balance": {
+        "reward": {
+            "quantity": 0,
+            "unit": "lovelace"
+        },
+        "total": {
+            "quantity": 0,
+            "unit": "lovelace"
+        },
+        "available": {
+            "quantity": 0,
+            "unit": "lovelace"
+        }
+    },
+    "name": "Jose Wallet 2",
+    "delegation": {
+        "next": [],
+        "active": {
+            "status": "not_delegating"
+        }
+    },
+    "id": "e6701cd3bce9d676ff124b5509d05cf7e1ac20b5",
+    "tip": {
+        "height": {
+            "quantity": 0,
+            "unit": "block"
+        },
+        "time": "2017-09-23T21:44:51Z",
+        "epoch_number": 0,
+        "absolute_slot_number": 0,
+        "slot_number": 0
+    },
+    "assets": {
+        "total": [],
+        "available": []
+    }
+}
