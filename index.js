@@ -91,7 +91,7 @@ app.post("/wallets", authenticateJWT, (req, res) => {
     console.log('wallet created'+response.data.id)
     res.status(200).send(response.data);
   }).catch(function (error) {
-    console.log(error);
+    console.log(error.response.data);
     res.status(500).send(error);
   })
 });

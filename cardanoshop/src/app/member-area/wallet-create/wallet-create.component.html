@@ -5,8 +5,8 @@
         <div class="form-floating mb-3">
             <input type="text" [(ngModel)]="wallet.name" required class="form-control" id="walletName" name="walletName" maxlength="255" placeholder="my wallet" #walletName="ngModel">
             <label for="walletName" class="form-label">Wallet Name</label>
-            <div [hidden]="walletName.valid || walletName.pristine" class="alert alert-danger">
-                Name is required
+            <div *ngIf="walletName.invalid && (walletName.dirty || walletName.touched)" [hidden]="validation('name').valid" class="alert alert-danger">
+                {{validation('name').message}}
               </div>
         </div>
     
@@ -25,10 +25,10 @@
           </div>
     
           <div class="form-floating mb-3">
-            <input type="password" [(ngModel)]="wallet.password" required maxlength="255" class="form-control" id="password" name="password" placeholder="my password" minlength="10">
+            <input type="password" [(ngModel)]="wallet.password" required maxlength="255" class="form-control" id="password" name="password" placeholder="my password" minlength="10" #password="ngModel">
             <label for="password" class="form-label">Wallet Password</label>
-            <div [hidden]="walletName.valid || walletName.pristine" class="alert alert-danger">
-                Password is required
+            <div *ngIf="password.invalid && (password.dirty || password.touched)" [hidden]="validation('password').valid" class="alert alert-danger">
+              {{validation('password').message}}
             </div>
         </div>
 

@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
-import { NetworkInformation } from 'src/app/services/network-information';
 import { Wallet } from 'src/app/services/wallet';
 import { WalletService } from 'src/app/services/wallet.service';
+
+export class Validator {
+  field: string
+  valid: boolean
+  message: string
+}
 
 @Component({
   selector: 'app-wallet-create',
@@ -87,6 +92,20 @@ export class WalletCreateComponent implements OnInit {
           console.log('oops', error)}
       );      
     }
+  }
+
+  validation(key: string): any {
+    if (key == "name") {
+      if (this.wallet.name == undefined ||this.wallet.name.length == 0) {
+        return {valid:false, message: 'Name is mandatory'}
+      }
+    }
+    if (key == "password") {
+      if (this.wallet.password == undefined ||this.wallet.password.length < 10) {
+        return {valid:false, message: "Password can't be less than 10 characters."}
+      }
+    }    
+    return {valid:true, message: null}
   }
 
   trackByFn(index: any) {
