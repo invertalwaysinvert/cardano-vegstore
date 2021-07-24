@@ -8,7 +8,7 @@ import { SessionStorage } from './session-storage';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(private router: Router, public environment: SessionStorage) { }
+  constructor(private router: Router, public session: SessionStorage) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request)
@@ -16,9 +16,9 @@ export class AuthInterceptor implements HttpInterceptor {
         catchError((err, caught: Observable<HttpEvent<any>>) => {
           if (err instanceof HttpErrorResponse && (err.status == 401 || err.status == 403)) {
             alert('Your session has expired.')
-            this.environment.accessToken = null
-            this.environment.headers = null
-            this.environment.currentUser = null
+            this.session.accessToken = null
+            this.session.headers = null
+            this.session.currentUser = null
             this.router.navigate([''], { queryParams: { returnUrl: request.url } });
             return of(err as any);
           }

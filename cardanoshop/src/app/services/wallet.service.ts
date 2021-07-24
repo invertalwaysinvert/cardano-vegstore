@@ -13,15 +13,15 @@ import { NetworkInformation } from './network-information';
 export class WalletService {
 
   constructor(private http: HttpClient, 
-    public environment: SessionStorage) { }
+    public session: SessionStorage) { }
 
   getMnemonic() {
-    let headers = this.environment.headers
+    let headers = this.session.headers
     return this.http.get<[String]>(`${environment.node_url}/mnemonic`, { headers });
   }
 
   getNetworkInformation(): Observable<NetworkInformation> {
-    let headers = this.environment.headers
+    let headers = this.session.headers
     return this.http.get<NetworkInformation>(`${environment.node_url}/network/information`, { headers })
     .pipe(
       map(result => result)

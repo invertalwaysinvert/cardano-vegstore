@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class SessionStorage {
@@ -22,11 +23,17 @@ export class SessionStorage {
   }
 
   get accessToken(): string {
+    if (environment.production == false) {
+      return localStorage.getItem('accessToken');
+    }
     return sessionStorage.getItem('accessToken')
   }
 
   set accessToken(value: string) {
     this._accessToken = value
+    if (environment.production == false) {
+      localStorage.setItem('accessToken', value);
+    }
     sessionStorage.setItem('accessToken', value)
   }
 
@@ -35,6 +42,13 @@ export class SessionStorage {
   }
 
   get headers(): HttpHeaders {
+    if (environment.production == false) {
+      var accessToken = localStorage.getItem('accessToken');
+      let headers = new HttpHeaders()
+      .set('Authorization', 'Bearer ' + accessToken)
+      .set('Content-Type', 'application/json')
+      return headers
+    }
     return this._headers
   }
 }

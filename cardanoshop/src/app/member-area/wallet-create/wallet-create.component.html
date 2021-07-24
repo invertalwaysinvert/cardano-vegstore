@@ -12,7 +12,16 @@
     
           <div class="mb-3">
             <label for="mnemonic" class="form-label">Mnemonic phrase</label>
-            <textarea class="form-control" [(ngModel)]="wallet.mnemonic" id="mnemonic" name="mnemonic" rows="3" readonly></textarea>
+            <div class="row">
+              <div class="col-md-6" *ngFor="let item of mnemonics;let i = index; trackBy: trackByFn;">
+                <label for="'mnemonic-' + i" class="form-label">{{i+1}}:</label>
+                <input type="text" [readonly]="!recoveryMode" required name="{{'mnemonic-' + i}}" [(ngModel)]="mnemonics[i].word">
+              </div> 
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <button type="button" class="btn btn-info" (click)="setMnemonic()">Set mnemonic phrase</button>
           </div>
     
           <div class="form-floating mb-3">
@@ -39,19 +48,25 @@
 </div>
 <app-footer></app-footer>
 
-<ng-template #modalData let-modal>
-    <div class="container">
-
+<ng-template #modalData let-modal let-c="close" let-d="dismiss">
+  <div class="container">
     <div class="mb-3">
-        <label for="confirmationMnemonic" class="form-label">Confirm the mnemonic phrase</label>
-        <textarea class="form-control" [(ngModel)]="confirmationMnemonic" id="mnemonic" name="confirmationMnemonic" rows="3"></textarea>
-        <div [hidden]="confirmationMnemonicValid" class="alert alert-danger">
-            This is bad, please verify your seed phrase otherwise you can't recover this wallet.
-        </div>  
+        <label for="confirmationMnemonic" class="form-label">Confirm the mnemonic phrase in the correct order</label>
     </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-success" (click)="confirmMnemonic()">Confirm</button>
+      <div class="mb-3">
+        <label for="mnemonic" class="form-label">Mnemonic phrase</label>
+        <div class="row">
+          <div class="col-md-6" *ngFor="let item of confirmationMnemonic;let i = index; trackBy: trackByFn;">
+            <label for="'mnemonic_' + i" class="form-label">{{i+1}}: &nbsp;</label>
+            <input type="text" required [name]="'mnemonic_' + i" [(ngModel)]="item.word">
+          </div> 
+        </div>
       </div>
+      <div [hidden]="confirmationMnemonicValid" class="alert alert-danger">
+        This is wrong, please verify your seed phrase otherwise you can't recover this wallet.
+      </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-success" (click)="confirmMnemonic()">Confirm</button>
     </div>
+  </div>
 </ng-template>

@@ -57,6 +57,10 @@ app.get("/mnemonic", authenticateJWT, (req, res) => {
   res.status(200).send(words);
 });
 
+app.get("/wordlist", authenticateJWT, (req, res) => {
+  res.status(200).send(utils.wordList);
+});
+
 app.post("/seed", authenticateJWT, (req, res) => {
   var mnemonic = req.mnemonic;
   var password = req.password;
