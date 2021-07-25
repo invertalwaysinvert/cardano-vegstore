@@ -22,8 +22,9 @@ export class MemberAreaComponent implements OnInit {
   ngOnInit(): void {
     var email = localStorage.getItem('userEmail');
     this.walletService.getWallet(email).subscribe(data => {
-      console.log(data)
-      this.wallet = data
+      if (data.name) {
+        this.wallet = data
+      }
     },
     error => {
       alert(error.data)

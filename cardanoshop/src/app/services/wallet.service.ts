@@ -37,10 +37,9 @@ export class WalletService {
     );
   }
 
-
-  createWallet(wallet: Wallet): Observable<boolean> {
+  createWallet(email: string, wallet: Wallet): Observable<boolean> {
     let headers = this.session.headers
-    return this.http.post<boolean>(`${environment.node_url}/wallets`, 
+    return this.http.post<boolean>(`${environment.node_url}/wallets?email=${email}`, 
     {name:wallet.name, mnemonic_sentence: wallet.mnemonic, passphrase: wallet.password, address_pool_gap: 20}, 
     { headers })
     .pipe(

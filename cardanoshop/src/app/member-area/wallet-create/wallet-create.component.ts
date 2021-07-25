@@ -81,7 +81,8 @@ export class WalletCreateComponent implements OnInit {
     if (this.confirmationMnemonicValid) {
       var mnemonicList = this.mnemonics.map((item) => item.word)
       this.wallet.mnemonic = mnemonicList as [string]
-      this.walletService.createWallet(this.wallet).subscribe(
+      var email = localStorage.getItem('userEmail')
+      this.walletService.createWallet(email, this.wallet).subscribe(
         data => {
           this.modalService.dismissAll()
           this.router.navigate(['members']);

@@ -10,15 +10,16 @@ const authenticateJWT = (req, res, next) => {
 
       jwt.verify(token, accessTokenSecret, (err, user) => {
           if (err) {
-              console.log(err)
-              return res.sendStatus(403);
+              console.log(err);
+              return res.status(403).send('token expired');
+          } else {
+            req.user = user;
+            next();
           }
-          req.user = user;
-          next();
       });
   } else {
       console.log('No auth header 401')
-      res.sendStatus(401);
+      res.status(401);
   }
 };
 

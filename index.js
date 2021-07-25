@@ -15,7 +15,7 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 
-const { accessTokenSecret, authenticateJWT } = require('./auth-token');
+const { accessTokenSecret, authenticateJWT } = require('./backend/auth-token');
 const app = express();
 const port = process.env.PORT || "80";
 
@@ -92,4 +92,8 @@ app.get("/network/information", authenticateJWT, (req, res) => {
 
 app.listen(port, () => {
   console.log(`Listening to requests on http://localhost:${port}`);
+});
+
+db.on('drain', function() {
+  console.log('All records are saved on disk now.');
 });

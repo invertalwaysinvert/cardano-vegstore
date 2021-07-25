@@ -3,19 +3,28 @@ request
 {
   "name": "Jose Wallet",
   "mnemonic_sentence": 
-  [
-  "abandon", "abandon",
-  "cause",   "abandon",
-  "abandon", "dose",
-  "abandon", "abandon",
-  "claw",    "abandon",
-  "abandon", "lab",
-  "abandon", "able",
-  "cake"
-],
+ [
+    "divide",
+    "token",
+    "moon",
+    "thumb",
+    "need",
+    "price",
+    "address",
+    "motion",
+    "supply",
+    "original",
+    "attitude",
+    "earth",
+    "sail",
+    "modify",
+    "shed"
+]
   "passphrase": "Cardano123",
   "address_pool_gap": 20
 }
+
+{"val":{"id":"f00e05ef4aeaaaab0c6b75c7768f7009aebae66d"}}
 
 response
 {
@@ -51,7 +60,7 @@ response
             "status": "not_delegating"
         }
     },
-    "id": "b429e59870a24074d48a0b8689ba2e76ee8ebd85",
+    "id": "f00e05ef4aeaaaab0c6b75c7768f7009aebae66d",
     "tip": {
         "height": {
             "quantity": 0,
