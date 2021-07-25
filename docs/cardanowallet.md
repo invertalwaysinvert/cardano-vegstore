@@ -1,4 +1,3 @@
-
 ---
 title: Cardano Wallet documentation
 layout: template
