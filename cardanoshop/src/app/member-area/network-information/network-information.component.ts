@@ -17,7 +17,13 @@ export class NetworkInformationComponent implements OnInit {
     this.networkInformation.network_tip = {epoch_number: null, slot_number: null}
     this.networkInformation.next_epoch = {epoch_start_time: null, epoch_number: null}
     this.networkInformation.sync_progress = {status:null}
-    this.walletService.getNetworkInformation().subscribe(information => this.networkInformation = information);
+    this.walletService.getNetworkInformation().subscribe(information => {
+      this.networkInformation = information
+    },
+    error => {
+      alert(error.data)
+      console.log('oops', error)
+    });
   }
 
 }

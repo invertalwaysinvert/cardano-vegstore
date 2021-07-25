@@ -17,19 +17,24 @@ export class MemberAreaComponent implements OnInit {
 
   constructor(private router: Router,
     private walletService: WalletService) { 
-    }
+  }
 
   ngOnInit(): void {
+    var email = localStorage.getItem('userEmail');
+    this.walletService.getWallet(email).subscribe(data => {
+      console.log(data)
+      this.wallet = data
+    },
+    error => {
+      alert(error.data)
+      console.log('oops', error)
+    });
   }
 
   createWallet() {
     this.router.navigate(['members/wallet-create']);
   }
-
-  recoverWallet() {
-    this.router.navigate(['members/wallet-recover']);
-  }
-
+  
   get user(): User {
     return {
       name: localStorage.getItem('userName'),

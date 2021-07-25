@@ -1,6 +1,5 @@
 var shajs = require('sha.js');
 var crypto = require('crypto');
-var getRandomValues = require('get-random-values');
 const wordList = require('./english.json');
 
 function zeroFill(str = '', targetLen = 0) {

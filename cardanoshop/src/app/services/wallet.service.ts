@@ -29,6 +29,15 @@ export class WalletService {
     );
   }
 
+  getWallet(email: string): Observable<Wallet> {
+    let headers = this.session.headers
+    return this.http.get<Wallet>(`${environment.node_url}/wallets?email=${email}`, { headers })
+    .pipe(
+      map(result => result)
+    );
+  }
+
+
   createWallet(wallet: Wallet): Observable<boolean> {
     let headers = this.session.headers
     return this.http.post<boolean>(`${environment.node_url}/wallets`, 

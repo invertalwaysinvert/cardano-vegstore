@@ -10,7 +10,7 @@
       <button class="btn btn-info" (click)="createWallet()">Create/Recover Wallet</button>
     </p>
   </div>
-  <div class="row">
+  <div class="row mb-5">
     <div class="col-sm-6">
       <div class="card" style="width: 18rem;">
         <img class="card-img-top" src="{{ user.photoUrl }}" alt="User picture">
@@ -27,6 +27,37 @@
         </div>
         <app-network-information></app-network-information>
       </div>
+    </div>
+  </div>
+  <div *ngIf="wallet != null" class="row">
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-header">
+          Wallet: {{wallet.name}}
+        </div>
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item d-flex justify-content-between align-items-center">Status: <span class="badge badge-secondary badge-pill">{{wallet.state.status}}</span></li>
+          </ul>
+          <p class="card-text"></p>
+        </div>
+      </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="card">
+          <div class="card-header">
+            Balance
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item d-flex justify-content-between align-items-center">Reward: <span class="badge badge-secondary badge-pill">{{wallet.balance.reward.quantity}}</span></li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">Total: <span class="badge badge-secondary badge-pill">{{wallet.balance.total.quantity}}</span></li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">Available: <span class="badge badge-secondary badge-pill">{{wallet.balance.available.quantity}}</span></li>
+            </ul>
+            <p class="card-text"></p>
+          </div>
+        </div>
     </div>
   </div>
 </div>
