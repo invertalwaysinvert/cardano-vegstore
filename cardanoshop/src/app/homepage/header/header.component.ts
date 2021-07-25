@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SocialAuthService } from 'angularx-social-login';
 import { SessionStorage } from 'src/app/helpers/session-storage';
-import { LoginService } from 'src/app/login.service';
+import { LoginService } from 'src/app/services/login.service';
 import { AuthenticateComponent } from '../../authenticate/authenticate.component';
 
 @Component({
@@ -14,17 +14,17 @@ import { AuthenticateComponent } from '../../authenticate/authenticate.component
 export class HeaderComponent implements OnInit {
 
   closeModal: string;
-  loggedIn: boolean;
+  loggedIn: boolean = false;
   userName: string;
 
   constructor(private modalService: NgbModal, 
-    public environment: SessionStorage,
+    public session: SessionStorage,
     private loginService: LoginService,
     private authService: SocialAuthService,
     private router: Router) {}
 
   ngOnInit(): void {
-    if (this.environment.currentUser != null && localStorage.getItem('userId') != null) {
+    if (this.session.currentUser != null && localStorage.getItem('userId') != null) {
       console.log('user is logged');
       this.loggedIn = true;
       this.userName = localStorage.getItem('userName');
@@ -34,7 +34,7 @@ export class HeaderComponent implements OnInit {
         this.loggedIn = (socialUser != null);
         this.loginService.login(socialUser.email)
           .subscribe(accessToken => {
-            this.environment.currentUser = socialUser.email
+            this.session.currentUser = socialUser.email
             this.loggedIn = (accessToken != null);
             localStorage.setItem('userId', socialUser.id);
             localStorage.setItem('userName', socialUser.name);

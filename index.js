@@ -1,10 +1,12 @@
 const express = require("express");
 const jwt = require('jsonwebtoken');
-const bip39 = require("bip39");
+var wallets = require('./backend/wallets');
+var dirty = require('dirty');
+var db = dirty('user.db');
 const path = require("path");
 var cors = require('cors');
 const axios = require('axios');
-bip39.setDefaultWordlist('english');
+
 /**
  * App Variables
  */
@@ -18,17 +20,25 @@ const app = express();
 const port = process.env.PORT || "80";
 
 app.use(express.static(process.cwd()+"/public/", { maxAge: "365d" }));
-
-var corsOptions = {
-  origin: process.env.FRONT_END,
-  optionsSuccessStatus: 200
-}
+app.use(express.urlencoded({extended: true}));
+ // To parse the incoming requests with JSON payloads
+app.use(express.json());
 
 app.use(cors({origin: [
   'http://127.0.0.1',
   'http://localhost:4200'
 ]}));
 
+// Init in memory key value database to store all wallet ids
+db.on('load', function() {
+  console.log('Dirty db memory loaded');
+
+  db.forEach(function(key, val) {
+    console.log('Found wallet: %s, val: %j', key, val);
+  });
+});
+
+// Configure CORS
 app.use((req, res, next) => {
   res.header(
     "Access-Control-Allow-Headers",
@@ -38,14 +48,17 @@ app.use((req, res, next) => {
   next();
 });
 
+// Serve the static compiled Angular application from public directory
 app.get('/', (req,res) => {
   res.sendFile(process.cwd()+"/public/index.html");
 });
 
+// just to test backend
 app.get("/hearthbeat", (req, res) => {
   res.status(200).send("WHATABYTE: Food For Devs");
 });
 
+// authenticate a user generating a token necessary to all endpoints valid for 24 hours
 app.post("/login", (req, res) => {
   var email = req.email;
   const accessToken = jwt.sign({ email: email }, accessTokenSecret, { expiresIn: '24h' });
@@ -54,45 +67,23 @@ app.post("/login", (req, res) => {
   });
 });
 
-app.get("/mnemonic", authenticateJWT, (req, res) => {
-  const mnemonic1 = bip39.generateMnemonic();
-  const mnemonic2 = bip39.generateMnemonic();
-  const array1 = mnemonic1.split(' ');
-  const array2 = mnemonic2.split(' ');
-  const finalMnemonic = array1.concat(array2);
-  res.status(200).send(finalMnemonic);
-});
+app.post("/wallets", authenticateJWT, wallets.createWallet);
 
-app.post("/seed", authenticateJWT, (req, res) => {
-  var mnemonic = req.mnemonic;
-  var password = req.password;
-  bip39.mnemonicToSeed(mnemonic, password)
-    .then(function (bytes) { 
-      var result = bytes.toString('hex');
-      console.log(result);
-      res.status(200).send(result);
-    });
-});
+app.get("/wallets", authenticateJWT, wallets.getWallet);
 
-app.post("/validatemnemonic", authenticateJWT, (req, res) => {
-  var mnemonic = req.mnemonic;
-  var password = req.password;
-  bip39.validateMnemonic(mnemonic, password)
-    .then(function (validation) { 
-      console.log(validation);
-      res.status(200).send(validation);
-    });
-});
+app.get("/addresses", authenticateJWT, wallets.getAddresses);
+
+app.get("/mnemonic", authenticateJWT, wallets.getMnemonic);
+
+app.get("/wordlist", authenticateJWT, wallets.getWordList);
 
 app.get("/network/information", authenticateJWT, (req, res) => {
   axios.get(`${process.env.WALLET_SERVER}/v2/network/information`)
   .then(function (response) {
-    // handle success
-    console.log(response.data);
     res.status(200).send(response.data);
   })
   .catch(function (error) {
-    console.log(error);
+    res.status(500).send(error);
   })
   .then(function () {
   });

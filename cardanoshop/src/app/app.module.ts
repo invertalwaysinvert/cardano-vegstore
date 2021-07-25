@@ -20,6 +20,7 @@ import { HeaderComponent } from './homepage/header/header.component';
 import { FooterComponent } from './homepage/footer/footer.component';
 import { AuthInterceptor } from './helpers/auth-interceptor'
 import { SessionStorage } from './helpers/session-storage';
+import { NetworkInformationComponent } from './member-area/network-information/network-information.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { SessionStorage } from './helpers/session-storage';
     HomepageComponent,
     WalletCreateComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    NetworkInformationComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,10 @@
+<div class="card-body">
+    <blockquote class="blockquote mb-0">            
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center">Epoch: <span class="badge badge-secondary badge-pill">{{networkInformation.network_tip.epoch_number}}</span></li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">Current slot: <span class="badge badge-secondary badge-pill">{{networkInformation.network_tip.slot_number}}</span></li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">Next epoch: <span class="badge badge-secondary badge-pill">{{networkInformation.next_epoch.epoch_start_time | date:'medium'}}</span></li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">Sync status: <span class="badge badge-secondary badge-pill">{{networkInformation.sync_progress.status}}</span></li>
+        </ul>
+    </blockquote>
+  </div>

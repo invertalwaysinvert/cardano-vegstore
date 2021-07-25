@@ -1,0 +1,143 @@
+
+request
+{
+  "name": "Jose Wallet",
+  "mnemonic_sentence": 
+  [
+  "abandon", "abandon",
+  "cause",   "abandon",
+  "abandon", "dose",
+  "abandon", "abandon",
+  "claw",    "abandon",
+  "abandon", "lab",
+  "abandon", "able",
+  "cake"
+],
+  "passphrase": "Cardano123",
+  "address_pool_gap": 20
+}
+
+response
+{
+    "passphrase": {
+        "last_updated_at": "2021-07-23T23:27:14.222939848Z"
+    },
+    "address_pool_gap": 20,
+    "state": {
+        "status": "syncing",
+        "progress": {
+            "quantity": 0,
+            "unit": "percent"
+        }
+    },
+    "balance": {
+        "reward": {
+            "quantity": 0,
+            "unit": "lovelace"
+        },
+        "total": {
+            "quantity": 0,
+            "unit": "lovelace"
+        },
+        "available": {
+            "quantity": 0,
+            "unit": "lovelace"
+        }
+    },
+    "name": "Jose Wallet",
+    "delegation": {
+        "next": [],
+        "active": {
+            "status": "not_delegating"
+        }
+    },
+    "id": "b429e59870a24074d48a0b8689ba2e76ee8ebd85",
+    "tip": {
+        "height": {
+            "quantity": 0,
+            "unit": "block"
+        },
+        "time": "2017-09-23T21:44:51Z",
+        "epoch_number": 0,
+        "absolute_slot_number": 0,
+        "slot_number": 0
+    },
+    "assets": {
+        "total": [],
+        "available": []
+    }
+}
+
+
+------
+wallet 2
+
+{
+  "name": "cheff wallet",
+  "mnemonic_sentence": 
+ [
+    "fruit",
+    "island",
+    "keep",
+    "update",
+    "cable",
+    "draft",
+    "olive",
+    "injury",
+    "pink",
+    "bamboo",
+    "supply",
+    "genius",
+    "slow",
+    "major",
+    "depart"
+],
+  "passphrase": "1234567890",
+  "address_pool_gap": 20
+}
+
+{
+    "passphrase": {
+        "last_updated_at": "2021-07-25T12:37:00.762930462Z"
+    },
+    "address_pool_gap": 20,
+    "state": {
+        "status": "ready"
+    },
+    "balance": {
+        "reward": {
+            "quantity": 0,
+            "unit": "lovelace"
+        },
+        "total": {
+            "quantity": 0,
+            "unit": "lovelace"
+        },
+        "available": {
+            "quantity": 0,
+            "unit": "lovelace"
+        }
+    },
+    "name": "cheff wallet",
+    "delegation": {
+        "next": [],
+        "active": {
+            "status": "not_delegating"
+        }
+    },
+    "id": "c020f023c3f005e52428c5088def46edf80382f4",
+    "tip": {
+        "height": {
+            "quantity": 6025857,
+            "unit": "block"
+        },
+        "time": "2021-07-25T14:23:04Z",
+        "epoch_number": 280,
+        "absolute_slot_number": 35656693,
+        "slot_number": 59893
+    },
+    "assets": {
+        "total": [],
+        "available": []
+    }
+}

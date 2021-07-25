@@ -5,7 +5,8 @@ import { SocialUser } from "angularx-social-login";
 import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
 import { Router } from '@angular/router';
 import { SessionStorage } from '../helpers/session-storage';
-import { LoginService } from '../login.service';
+import { LoginService } from '../services/login.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-authenticate',
@@ -17,14 +18,14 @@ export class AuthenticateComponent implements OnInit {
   constructor(public activeModal: NgbActiveModal,
     private authService: SocialAuthService,
     private loginService: LoginService,
-    public environment: SessionStorage,
+    public session: SessionStorage,
     private router: Router) { }
 
     user: SocialUser;
-    loggedIn: boolean;
+    loggedIn: boolean = false;
 
     ngOnInit() {
-      if (this.environment.currentUser != null) {
+      if (this.session.currentUser != null) {
         console.log('user is logged');
         this.loggedIn = true;
         this.user = new SocialUser();
@@ -35,7 +36,10 @@ export class AuthenticateComponent implements OnInit {
           this.loggedIn = (socialUser != null);
           this.loginService.login(socialUser.email)
             .subscribe(accessToken => {
-              this.environment.currentUser = socialUser.email
+              this.session.currentUser = socialUser.email
+              if (environment.production == false) {
+                localStorage.setItem('accessToken', accessToken);
+              }
               localStorage.setItem('userId', socialUser.id);
               localStorage.setItem('userName', socialUser.name);
               localStorage.setItem('userEmail', socialUser.email);
@@ -62,8 +66,8 @@ export class AuthenticateComponent implements OnInit {
   }
 
   signOut(): void {
-    this.environment.currentUser = null
-    this.environment.accessToken = null
+    this.session.currentUser = null
+    this.session.accessToken = null
     sessionStorage.clear()
     this.authService.signOut();
     ['userId', 'userName', 'userEmail', 'photoUrl'].forEach (function (key) { localStorage.removeItem(key); });
