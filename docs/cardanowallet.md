@@ -12,7 +12,7 @@ Cardano wallet is the most important component, its the only way your applicatio
 
 First thing to consider is to install the cardano-wallet component in your node. It must reside in the same server because its heavily dependent of the blockchain. The node must be complete synchronised otherwise won't work.
 
-The easiest way to install it we just downloaded the latest release using wget from https://github.com/input-output-hk/cardano-wallet and extract in our server.
+The easiest way to install it we just downloaded the latest release using wget from [cardano-wallet Github](https://github.com/input-output-hk/cardano-wallet) and extract in our server.
 After, we copy the cardano-wallet executable to /usr/local/bin.
 
 But not so fast, you need to setup a service otherwise everytime you close the terminal your server will kill the process. See bellow how to run cardano wallet as service.
