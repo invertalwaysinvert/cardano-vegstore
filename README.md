@@ -12,10 +12,15 @@ Cardano Veg Store is a template project for e-commerce integration, it mains for
 These concepts can be reproduced in any sort of technology and programming languages, the choice for Angular and NodeJS are due fact these are the mainstream web app development platforms these days but Cardano-wallet, as a rest API can be used in any type of platform that's compatible with JSON.
 The Cardano-wallet is a very useful application created by IOHK and allows all important features related to wallets like creation, recovering, transaction, sending, and receiving ADA.
 The most important about Cardano-wallet it runs stand-alone in a server exposing an endpoint as REST API, we can build front ends around it that allow end-users to have multiple clients, web or mobile to these wallets.
+
 Any website that wants to connect must allow your users to first authenticate, after that, we can match a previously created wallet using seed phrase and password encrypted in case of any database leak that could be potentially disastrous.
+
 After customers recover or create the wallet we can store this information, for purposes of simplicity, this pet project doesn't have a database for such a purpose.
 The Angular front end only communicates with the NodeJS backend, it allows another layer of security not allowing any direct access to our wallet server, we can even configure a firewall to not answer any requests outside the desired IP we want.
+
 The NodeJS backend calls Cardano-wallet, can be responsible for a simple authentication mechanism validating some users we allow and redirecting responses.
+
+For complete and updated documentation please check our [Github Pages](https://cheffnft.github.io/cardano-vegstore/)
 
 # Configuration ⌛️
 First, you will need:
