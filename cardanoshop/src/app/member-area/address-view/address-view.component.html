@@ -1,0 +1,18 @@
+<div class="modal-header">
+<h4 class="modal-title" id="modal-basic-title">Cardano Shop User Address</h4>
+<button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">×</span>
+</button>
+</div>
+<div class="modal-body">
+
+<div class="card">
+    <qrcode [qrdata]="address.id" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+    <div class="card-body">
+      <h5 class="card-title">This address can be used to make transactions with your wallet.</h5>
+      <p class="card-text">{{address.id}}&nbsp;<span class="badge bg-primary">{{address.state}}</span>
+      </p>
+    </div>
+  </div>
+
+</div>

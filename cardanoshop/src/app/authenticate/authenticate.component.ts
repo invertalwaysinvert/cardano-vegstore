@@ -23,6 +23,10 @@ export class AuthenticateComponent implements OnInit {
 
     user: SocialUser;
     loggedIn: boolean = false;
+    userpasswordAuth = false;
+    // only for username password form
+    userEmail: string
+    userPassword: string
 
     ngOnInit() {
       if (this.session.currentUser != null) {
@@ -56,6 +60,40 @@ export class AuthenticateComponent implements OnInit {
     this.activeModal.dismiss();
     this.router.navigate(['members']);
   }
+
+  signUserPassword(): void {
+    if (this.userEmail) {
+      this.loginService.login(this.userEmail)
+      .subscribe(accessToken => {
+        this.user = new SocialUser();
+        this.user.email = this.userEmail
+        this.session.currentUser = this.userEmail
+        if (environment.production == false) {
+          localStorage.setItem('accessToken', accessToken);
+        }
+        localStorage.setItem('userEmail', this.userEmail);
+        localStorage.setItem('userId', this.userEmail);
+        localStorage.setItem('userName', this.userEmail);
+        localStorage.setItem('photoUrl', 'assets/img/userpicture.png');
+        this.loggedIn = true
+      })
+    }
+  }
+
+  validation(key: string): any {
+    if (key == "name") {
+      if (this.userEmail == undefined ||this.userEmail.length == 0) {
+        return {valid:false, message: 'Email is mandatory'}
+      }
+    }
+    if (key == "password") {
+      if (this.userPassword == undefined ||this.userPassword.length < 10) {
+        return {valid:false, message: "Password is mandatory."}
+      }
+    }
+    return {valid:true, message: null}
+  }
+
 
   signInWithGoogle(): void {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);

@@ -10,16 +10,37 @@
       <p>All data related of profiles are not stored.
       </p>
       <div *ngIf="loggedIn">
-        <img src="{{ user.photoUrl }}">
+        <img *ngIf="!userpasswordAuth" src="{{ user.photoUrl }}">
         <div>
           <h4>{{ user.name }}</h4>
           <p>{{ user.email }}</p>
         </div>
       </div>
 
-      <button *ngIf="!loggedIn" class="btn btn-info fa fa-google" (click)="signInWithGoogle()"><span class="ml-1">Sign with google</span></button>
+      <div *ngIf="!loggedIn">
+        <div class="form-floating mb-3">
+          <input type="email" [(ngModel)]="userEmail" required class="form-control" id="email" name="email" maxlength="255" placeholder="my wallet" #email="ngModel">
+          <label for="email" class="form-label">User Email</label>
+          <div *ngIf="email.invalid && (email.dirty || email.touched)" [hidden]="validation('email').valid" class="alert alert-danger">
+              {{validation('name').message}}
+            </div>
+        </div>
+
+        <div class="form-floating mb-3">
+          <input type="password" [(ngModel)]="userPassword" required maxlength="255" class="form-control" id="password" name="password" placeholder="User password" #password="ngModel">
+          <label for="password" class="form-label">User Password</label>
+          <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+            {{validation('password').message}}
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer" *ngIf="!loggedIn">
+        <button *ngIf="!loggedIn" class="btn btn-info fa fa-user" (click)="signUserPassword()"><span class="ml-1">Sign with email</span></button>
+        <button *ngIf="!loggedIn" class="btn btn-info fa fa-google" (click)="signInWithGoogle()"><span class="ml-1">Sign with google</span></button>
+      </div>
     </div>
     <div class="modal-footer" *ngIf="loggedIn">
       <button *ngIf="loggedIn" type="button" class="btn btn-info" (click)="openMemberArea()">Members</button>
-      <button *ngIf="loggedIn" type="button" class="btn btn-danger" (click)="signOut()">Signout</button>
+      <button *ngIf="loggedIn" type="button" class="btn btn-secondary" (click)="activeModal.dismiss('Cross click')">Continue</button>
     </div>

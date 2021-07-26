@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { SessionStorage } from '../helpers/session-storage';
-import { NetworkInformation } from '../services/network-information';
+import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { Address } from '../services/address';
 import { User } from '../services/user';
 import { Wallet } from '../services/wallet';
 import { WalletService } from '../services/wallet.service';
+import { AddressViewComponent } from './address-view/address-view.component';
 
 @Component({
   selector: 'app-member-area',
@@ -14,8 +15,10 @@ import { WalletService } from '../services/wallet.service';
 export class MemberAreaComponent implements OnInit {
 
   wallet: Wallet
+  addresses: [Address]
 
   constructor(private router: Router,
+    private modalService: NgbModal,
     private walletService: WalletService) { 
   }
 
@@ -30,12 +33,27 @@ export class MemberAreaComponent implements OnInit {
       alert(error.data)
       console.log('oops', error)
     });
+    this.walletService.getAddresses(email).subscribe(data => {
+      this.addresses = data
+    },
+    error => {
+      alert(error.data)
+      console.log('oops', error)
+    });
   }
 
   createWallet() {
     this.router.navigate(['members/wallet-create']);
   }
   
+  showAddress(address) {
+    let options: NgbModalOptions = {
+      size: 'sm'
+    };
+    const modal = this.modalService.open(AddressViewComponent, options)
+    modal.componentInstance.address = address
+  }
+
   get user(): User {
     return {
       name: localStorage.getItem('userName'),

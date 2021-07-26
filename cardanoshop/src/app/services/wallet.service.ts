@@ -6,6 +6,7 @@ import { environment } from '../../environments/environment';
 import { SessionStorage } from '../helpers/session-storage';
 import { NetworkInformation } from './network-information';
 import { Wallet } from './wallet';
+import { Address } from './address';
 
 
 @Injectable({
@@ -44,6 +45,14 @@ export class WalletService {
     { headers })
     .pipe(
       map(result => true)
+    );
+  }
+
+  getAddresses(email: string): Observable<[Address]> {
+    let headers = this.session.headers
+    return this.http.get<[Address]>(`${environment.node_url}/addresses?email=${email}`, { headers })
+    .pipe(
+      map(result => result)
     );
   }
 }

@@ -9,14 +9,11 @@ import { WalletService } from 'src/app/services/wallet.service';
 })
 export class NetworkInformationComponent implements OnInit {
 
-  networkInformation: NetworkInformation
+  networkInformation = new NetworkInformation()
 
   constructor(private walletService: WalletService) { }
 
   ngOnInit(): void {
-    //this.networkInformation.network_tip = {epoch_number: null, slot_number: null}
-    //this.networkInformation.next_epoch = {epoch_start_time: null, epoch_number: null}
-    //this.networkInformation.sync_progress = {status:null}
     this.walletService.getNetworkInformation().subscribe(information => {
       this.networkInformation = information
     },

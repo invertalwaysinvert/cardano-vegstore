@@ -13,9 +13,9 @@
           <div class="mb-3">
             <label for="mnemonic" class="form-label">Mnemonic phrase</label>
             <div class="row">
-              <div class="col-md-6" *ngFor="let item of mnemonics;let i = index; trackBy: trackByFn;">
-                <label for="'mnemonic-' + i" class="form-label">{{i+1}}:</label>
-                <input type="text" [readonly]="!recoveryMode" required name="{{'mnemonic-' + i}}" [(ngModel)]="mnemonics[i].word">
+              <div class="col-md-6 d-flex justify-content-between align-items-center" *ngFor="let item of mnemonics;let i = index; trackBy: trackByFn;">
+                <div class="col-md-1"><label for="'mnemonic-' + i" class="form-label">{{i+1}}:</label></div>
+                <div class="col-md-11"><input type="text" [readonly]="!recoveryMode" required name="{{'mnemonic-' + i}}" [(ngModel)]="mnemonics[i].word"></div>
               </div> 
             </div>
           </div>
@@ -41,7 +41,7 @@
         </div>
     
           <div class="modal-footer">
-            <button type="button" class="btn btn-info" (click)="reset()">Reset</button>
+            <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
             <button type="submit" class="btn btn-success" [disabled]="!walletForm.form.valid" (click)="create(modalData)">Create</button>
           </div>
     </form>
@@ -56,9 +56,9 @@
       <div class="mb-3">
         <label for="mnemonic" class="form-label">Mnemonic phrase</label>
         <div class="row">
-          <div class="col-md-6" *ngFor="let item of confirmationMnemonic;let i = index; trackBy: trackByFn;">
-            <label for="'mnemonic_' + i" class="form-label">{{i+1}}: &nbsp;</label>
-            <input type="text" required [name]="'mnemonic_' + i" [(ngModel)]="item.word">
+          <div class="col-md-6 d-flex justify-content-between align-items-center" *ngFor="let item of confirmationMnemonic;let i = index; trackBy: trackByFn;">
+            <label class="col-md-1" for="'mnemonic_' + i" class="form-label">{{i+1}}: &nbsp;</label>
+            <input class="col-md-11" type="text" required [name]="'mnemonic_' + i" [(ngModel)]="item.word">
           </div> 
         </div>
       </div>

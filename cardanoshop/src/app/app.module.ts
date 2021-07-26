@@ -9,6 +9,7 @@ import {
 import { environment } from './../environments/environment';
 import { FormsModule } from '@angular/forms';
 import { LightboxModule } from 'ngx-lightbox';
+import { QRCodeModule } from 'angularx-qrcode';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +22,7 @@ import { FooterComponent } from './homepage/footer/footer.component';
 import { AuthInterceptor } from './helpers/auth-interceptor'
 import { SessionStorage } from './helpers/session-storage';
 import { NetworkInformationComponent } from './member-area/network-information/network-information.component';
+import { AddressViewComponent } from './member-area/address-view/address-view.component';
 
 
 @NgModule({
@@ -32,7 +34,8 @@ import { NetworkInformationComponent } from './member-area/network-information/n
     WalletCreateComponent,
     HeaderComponent,
     FooterComponent,
-    NetworkInformationComponent
+    NetworkInformationComponent,
+    AddressViewComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +44,8 @@ import { NetworkInformationComponent } from './member-area/network-information/n
     AppRoutingModule,
     NgbModule,
     FormsModule,
-    SocialLoginModule
+    SocialLoginModule,
+    QRCodeModule
   ],
   providers: [
     SessionStorage,

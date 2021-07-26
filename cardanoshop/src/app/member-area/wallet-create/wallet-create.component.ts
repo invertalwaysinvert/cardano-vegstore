@@ -60,10 +60,11 @@ export class WalletCreateComponent implements OnInit {
     ]
   }
 
-  reset() {
+  cancel() {
     this.wallet.name = null
     this.confirmationPassword = null
     this.wallet.password = null
+    this.router.navigate(['members']);
   }
   
   create(modalData) {
@@ -105,7 +106,7 @@ export class WalletCreateComponent implements OnInit {
       if (this.wallet.password == undefined ||this.wallet.password.length < 10) {
         return {valid:false, message: "Password can't be less than 10 characters."}
       }
-    }    
+    }
     return {valid:true, message: null}
   }
 
