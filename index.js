@@ -1,6 +1,8 @@
 const express = require("express");
 const jwt = require('jsonwebtoken');
 var wallets = require('./backend/wallets');
+var transactions = require('./backend/transactions');
+
 var dirty = require('dirty');
 var db = dirty('user.db');
 const path = require("path");
@@ -76,6 +78,8 @@ app.get("/addresses", authenticateJWT, wallets.getAddresses);
 app.get("/mnemonic", authenticateJWT, wallets.getMnemonic);
 
 app.get("/wordlist", authenticateJWT, wallets.getWordList);
+
+app.get("/transactions", authenticateJWT, transactions.getTransactions);
 
 app.get("/network/information", authenticateJWT, (req, res) => {
   axios.get(`${process.env.WALLET_SERVER}/v2/network/information`)
