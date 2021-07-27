@@ -11,16 +11,16 @@ export class Transaction {
             id: string, index: number
         }
     ]
-    outputs: [
-        {
-            amount: Amount
-            address: String
-            assets: [Asset]
-        }
-    ]
+    outputs: Output[]
     direction: string
     fee: Amount
     id: string
+}
+
+export class Output {
+    amount: Amount
+    address: String
+    assets: [Asset]
 }
 
 export class Amount {

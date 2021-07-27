@@ -1,3 +1,5 @@
+import { Asset } from "./transaction"
+
 export class Wallet {
     name: String
     password?: String
@@ -18,5 +20,9 @@ export class Wallet {
             quantity: number
             unit: string
         }
+    }
+    assets: {
+        total: Asset[]
+        available: Asset[]
     }
 }
