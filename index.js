@@ -81,7 +81,11 @@ app.get("/wordlist", authenticateJWT, wallets.getWordList);
 
 app.get("/transactions", authenticateJWT, transactions.getTransactions);
 
+app.post("/transactions/fees", authenticateJWT, transactions.getFees);
+
 app.post("/transactions", authenticateJWT, transactions.createTransaction);
+
+app.delete("/transactions", authenticateJWT, transactions.forgetTransaction);
 
 app.get("/network/information", authenticateJWT, (req, res) => {
   axios.get(`${process.env.WALLET_SERVER}/v2/network/information`)
