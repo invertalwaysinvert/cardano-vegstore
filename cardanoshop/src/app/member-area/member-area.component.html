@@ -1,115 +1,122 @@
-<app-header></app-header>
-<div class="container fill">
-  <div *ngIf="wallet == null">
-    <p>
-      <ngb-alert [dismissible]="false">
-        <strong>Not found!</strong> You have no wallet created already, please recover/create your wallet. Test Net address only.
-      </ngb-alert>
-    </p>
-    <p>
-      <button class="btn btn-info" (click)="createWallet()">Create/Recover Wallet</button>
-    </p>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <app-header></app-header>
+    </div>
   </div>
+  <p></p>
   <div class="row mb-5">
-    <div class="col-sm-6">
-      <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="{{ user.photoUrl }}" alt="User picture">
-        <div class="card-body">
-          <p class="card-text">{{ user.email }}</p>
-          <h4>{{ user.name }}</h4>
-        </div>
-      </div>
+    <div *ngIf="wallet == null">
+      <p>
+        <ngb-alert [dismissible]="false">
+          <strong>Not found!</strong> You have no wallet created already, please recover/create your wallet. Test Net address only.
+        </ngb-alert>
+      </p>
+      <p>
+        <button class="btn btn-info" (click)="createWallet()">Create/Recover Wallet</button>
+      </p>
     </div>
-    <div class="col-sm-6">
-      <div class="card">
-        <div class="card-header">
-          Network Information
-        </div>
-        <app-network-information></app-network-information>
-      </div>
-    </div>
-  </div>
-
-  <div *ngIf="wallet != null">
-    
-    <h3>
-      Ada Price:
-      <small class="text-muted">{{adaPrice | currency: 'USD'}}</small>
-    </h3>
-    <div class="row mb-5" *ngIf="wallet.state.status == 'ready'">
-      <div>
-        <div class="btn-group" role="group">
-          <button class="btn btn-outline-primary">Send</button>
-          <button class="btn btn-outline-secondary" (click)="receiveAddresses()">Receive</button>
-          <button class="btn btn-outline-primary" (click)="transactions()">Transactions</button>
-          <button class="btn btn-outline-primary">Stake</button>
-        </div>
-      </div>
-    </div>
-
     <div class="row mb-5">
-      <div class="col-sm-12">
+      <div class="col-sm-6">
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top" src="{{ user.photoUrl }}" alt="User picture">
+          <div class="card-body">
+            <p class="card-text">{{ user.email }}</p>
+            <h4>{{ user.name }}</h4>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
         <div class="card">
           <div class="card-header">
-            Wallet: {{wallet.name}}
+            Network Information
           </div>
-          <div class="card-body">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item d-flex justify-content-between align-items-center">
-                Status: <span class="badge badge-pill" 
-                [ngClass]="wallet.state.status == 'ready' ? 'bg-primary' : 'bg-secondary'"
-                >{{wallet.state.status}}</span></li>
-            </ul>
-            <p class="card-text"></p>
-          </div>
+          <app-network-information></app-network-information>
         </div>
       </div>
     </div>
-    
-    <div class="row mb-5">
-      <div class="col-sm-12">
-        <div class="card">
-          <div class="card-header">
-            Balance
-          </div>
-          <div class="card-body">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item d-flex justify-content-between align-items-center">
-                Reward: <span class="badge bg-secondary badge-pill">{{ formatBalance(wallet.balance.reward.quantity) }}</span></li>
-              <li class="list-group-item d-flex justify-content-between align-items-center">
-                Total: <span class="badge bg-secondary badge-pill">{{ formatBalance(wallet.balance.total.quantity) }}</span></li>
-              <li class="list-group-item d-flex justify-content-between align-items-center">
-                Available: <span class="badge bg-secondary badge-pill">{{ formatBalance(wallet.balance.available.quantity) }}</span></li>
-            </ul>
+  
+    <div *ngIf="wallet != null">
+      
+      <h3>
+        Ada Price:
+        <small class="text-muted">{{adaPrice | currency: 'USD'}}</small>
+      </h3>
+      <div class="row mb-5" *ngIf="wallet.state.status == 'ready'">
+        <div>
+          <div class="btn-group" role="group">
+            <button class="btn btn-outline-primary">Send</button>
+            <button class="btn btn-outline-secondary" (click)="receiveAddresses()">Receive</button>
+            <button class="btn btn-outline-primary" (click)="transactions()">Transactions</button>
+            <button class="btn btn-outline-primary">Stake</button>
           </div>
         </div>
       </div>
-    </div>
-    
-    <div class="row mb-5">
-      <div class="col-sm-12">
+  
+      <div class="row mb-5">
+        <div class="col-sm-12">
           <div class="card">
             <div class="card-header">
-              Assets
+              Wallet: {{wallet.name}}
             </div>
             <div class="card-body">
-              <span *ngFor="let asset of wallet.assets.total;let i = index;">
-                <ul class="list-group list-group-flush" *ngIf="wallet.assets.total.length > 0">
-                  <li style="overflow: hidden; text-overflow: ellipsis;" 
-                  class="list-group-item d-flex align-items-center text-wrap">
-                    name: {{ asset.asset_name }} </li>
-                  <li style="overflow: hidden; text-overflow: ellipsis;" 
-                  class="list-group-item d-flex align-items-center text-wrap">
-                    policy_id: {{ asset.policy_id }} </li>
-                  <li style="overflow: hidden; text-overflow: ellipsis;" 
-                  class="list-group-item d-flex align-items-center text-wrap">
-                    Qty: {{ asset.quantity }} </li>
-                </ul>
-              </span>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Status: <span class="badge badge-pill" 
+                  [ngClass]="wallet.state.status == 'ready' ? 'bg-primary' : 'bg-secondary'"
+                  >{{wallet.state.status}}</span></li>
+              </ul>
+              <p class="card-text"></p>
             </div>
           </div>
+        </div>
+      </div>
+      
+      <div class="row mb-5">
+        <div class="col-sm-12">
+          <div class="card">
+            <div class="card-header">
+              Balance
+            </div>
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Reward: <span class="badge bg-secondary badge-pill">{{ formatBalance(wallet.balance.reward.quantity) }}</span></li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Total: <span class="badge bg-secondary badge-pill">{{ formatBalance(wallet.balance.total.quantity) }}</span></li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Available: <span class="badge bg-secondary badge-pill">{{ formatBalance(wallet.balance.available.quantity) }}</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="row mb-5">
+        <div class="col-sm-12">
+            <div class="card">
+              <div class="card-header">
+                Assets
+              </div>
+              <div class="card-body">
+                <span *ngFor="let asset of wallet.assets.total;let i = index;">
+                  <ul class="list-group list-group-flush" *ngIf="wallet.assets.total.length > 0">
+                    <li style="overflow: hidden; text-overflow: ellipsis;" 
+                    class="list-group-item d-flex align-items-center text-wrap">
+                      name: {{ asset.asset_name }} </li>
+                    <li style="overflow: hidden; text-overflow: ellipsis;" 
+                    class="list-group-item d-flex align-items-center text-wrap">
+                      policy_id: {{ asset.policy_id }} </li>
+                    <li style="overflow: hidden; text-overflow: ellipsis;" 
+                    class="list-group-item d-flex align-items-center text-wrap">
+                      Qty: {{ asset.quantity }} </li>
+                  </ul>
+                </span>
+              </div>
+            </div>
+        </div>
       </div>
     </div>
   </div>
+  
 </div>
-<app-footer></app-footer>
