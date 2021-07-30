@@ -1,0 +1,22 @@
+<div class="container fill">
+  <app-header></app-header>
+
+  <h2>Address available to receive</h2>
+  <div class="row mb-5">
+    <div>
+      <button class="btn btn-outline-primary" (click)="back()">Back</button>
+    </div>
+  </div>
+    <div class="col-sm-12">
+        <div class="card">
+          <div class="card-header">
+            Addresses of this wallet
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <li *ngFor="let address of addresses;let i = index;" style="cursor: pointer;" (click)="showAddress(address)" class="list-group-item d-flex justify-content-between align-items-center">{{address.id}}<span class="badge bg-secondary badge-pill">{{address.state}}</span></li>
+              </ul>
+          </div>
+        </div>
+    </div>
+</div>

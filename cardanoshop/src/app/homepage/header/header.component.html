@@ -1,142 +1,33 @@
-<div class="humberger__menu__overlay"></div>
-<div class="humberger__menu__wrapper">
-  <div class="humberger__menu__logo">
-    <a href="#" class="logo">Cardano V-Shop</a>
-  </div>
-  <div class="humberger__menu__cart">
-    <ul>
-      <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-      <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
-    </ul>
-    <div class="header__cart__price">item: <span>150.00</span></div>
-  </div>
-  <div class="humberger__menu__widget">
-    <div class="header__top__right__language">
-      <img src="assets/img/language.png" alt="" />
-      <div>English</div>
-      <span class="arrow_carrot-down"></span>
-      <ul>
-        <li><a href="#">Spanish</a></li>
-        <li><a href="#">English</a></li>
-      </ul>
-    </div>
-    <div class="header__top__right__auth">
-    </div>
-  </div>
-  <nav class="humberger__menu__nav mobile-menu">
-    <ul>
-      <li class="active"><a href="#">Home</a></li>
-      <li><a href="#">Shop</a></li>
-      <li><a href="#">Pages</a>
-        <ul class="header__menu__dropdown">
-          <li><a href="#">Shop Details</a></li>
-          <li><a href="#">Shoping Cart</a></li>
-          <li><a href="#">Check Out</a></li>
-          <li><a href="#">Blog Details</a></li>
-        </ul>
-      </li>
-      <li><a href="#">Blog</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
-  </nav>
-  <div id="mobile-menu-wrap"></div>
-  <div class="header__top__right__social">
-    <a href="#"><i class="fa fa-facebook"></i></a>
-    <a href="#"><i class="fa fa-twitter"></i></a>
-    <a href="#"><i class="fa fa-linkedin"></i></a>
-    <a href="#"><i class="fa fa-pinterest-p"></i></a>
-  </div>
-  <div class="humberger__menu__contact">
-    <ul>
-      <li><i class="fa fa-envelope"></i> therichposts@gmail.com</li>
-      <li>Free Shipping for all Order of 99</li>
-    </ul>
-  </div>
-</div>
-
-<header class="header">
-  <div class="header__top">
-    <div class="container">
+<!-- header -->
+<header>
+  <div class="container-fluid">
       <div class="row">
-        <div class="col-lg-6 col-md-6">
-          <div class="header__top__left">
-            <ul>
-              <li><i class="fa fa-envelope"></i> therichposts@gmail.com</li>
-              <li>Free Shipping for all Order of 99</li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-lg-6 col-md-6">
-          <div class="header__top__right">
-            <div class="header__top__right__social">
-              <a href="#"><i class="fa fa-facebook"></i></a>
-              <a href="#"><i class="fa fa-twitter"></i></a>
-              <a href="#"><i class="fa fa-linkedin"></i></a>
-              <a href="#"><i class="fa fa-pinterest-p"></i></a>
-            </div>
-            <div class="header__top__right__language">
-              <img src="assets/img/language.png" alt="" />
-              <div>English</div>
-              <span class="arrow_carrot-down"></span>
-              <ul>
-                <li><a href="#">Spanis</a></li>
-                <li><a href="#">English</a></li>
-              </ul>
-            </div>
-            <div class="header__top__right__auth">
-              <button *ngIf="!loggedIn" class="btn fa fa-user fa-fw" (click)="triggerModal()"><span class="ml-1">Authenticate</span> </button>
-
-              <div *ngIf="loggedIn" ngbDropdown class="d-inline-block">
-                <button class="btn fa fa-user fa-fw" id="dropdownBasic1" ngbDropdownToggle><span class="ml-1">{{ userName }}</span></button>
-                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                  <button ngbDropdownItem (click)="openMemberArea()">Member area</button>
-                  <button ngbDropdownItem (click)="signOut()">Sign out</button>
-                </div>
+          <div class="col-md-3">
+              <div class="full">
+                  <a class="logo" href="index.html"><img src="assets/images/logo.png" alt="#" /></a>
               </div>
-
-            </div>
           </div>
-        </div>
+          <div class="col-md-9">
+              <div class="full">
+                  <div class="right_header_info">
+                      <ul>
+                          <li class="dinone">Contact Us : <img style="margin-right: 15px;margin-left: 15px;" src="assets/images/phone_icon.png" alt="#"><a href="#">987-654-3210</a></li>
+                          <li class="dinone"><img style="margin-right: 15px;" src="assets/images/mail_icon.png" alt="#"><a href="#">demo@gmail.com</a></li>
+                          <li class="dinone"><img style="margin-right: 15px;height: 21px;position: relative;top: -2px;" src="assets/images/location_icon.png" alt="#"><a href="#">104 New york , USA</a></li>
+                          <li class="button_user"><a (click)="triggerModal()" *ngIf="!loggedIn" class="button active" style="cursor: pointer;">Login</a>
+                            <a class="button" (click)="triggerModal()" *ngIf="!loggedIn" style="cursor: pointer;">Register</a>
+                          </li>
+                          <li><img style="margin-right: 15px;" src="assets/images/search_icon.png" alt="#"></li>
+                          <li>
+                              <button type="button" id="sidebarCollapse">
+                                  <img src="assets/images/menu_icon.png" alt="#">
+                              </button>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
       </div>
-    </div>
-  </div>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-3">
-        <div class="header__logo">
-          <a href="#" class="logo">Cardano V-Shop</a>
-        </div>
-      </div>
-      <div class="col-lg-6">
-        <nav class="header__menu">
-          <ul>
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#">Shop</a></li>
-            <li><a href="#">Pages</a>
-              <ul class="header__menu__dropdown">
-                <li><a href="#">Shop Details</a></li>
-                <li><a href="#">Shoping Cart</a></li>
-                <li><a href="#">Check Out</a></li>
-                <li><a href="#">Blog Details</a></li>
-              </ul>
-            </li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">Contact</a></li>
-          </ul>
-        </nav>
-      </div>
-      <div class="col-lg-3">
-        <div class="header__cart">
-          <ul>
-            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
-          </ul>
-          <div class="header__cart__price">item: <span>150.00 ADA</span></div>
-        </div>
-      </div>
-    </div>
-    <div class="humberger__open">
-      <i class="fa fa-bars"></i>
-    </div>
   </div>
 </header>
+<!-- end header -->

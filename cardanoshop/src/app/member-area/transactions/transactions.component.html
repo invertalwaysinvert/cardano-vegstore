@@ -1,0 +1,65 @@
+<app-header></app-header>
+<div class="container fill">
+  <h2>Recent transactions</h2>
+  <div class="row mb-5">
+    <div>
+      <button class="btn btn-outline-primary" (click)="back()">Back</button>
+    </div>
+  </div>
+    <div class="col-sm-12">
+        <div class="card">
+          <div class="card-header">
+            Addresses of this wallet
+          </div>
+          <div class="card-body">
+            
+          </div>
+        </div>
+    </div>
+
+    <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body">
+          <div class="row mb-5">
+
+            <div class="col-sm-12">
+              <div class="card">
+                <div class="card-header">
+                  Incoming Transactions
+                </div>
+                <div class="card-body">
+                  <ul class="list-group list-group-flush">
+                    <li *ngFor="let transaction of incomingTransactions;let i = index;" 
+                    style="cursor: pointer;overflow: hidden; text-overflow: ellipsis;" 
+                    class="list-group-item d-flex align-items-center text-wrap">
+                    <span *ngFor="let detail of detailTransaction(transaction)">
+                      <p>from: {{ detail.origin_address }}</p>
+                      <p>to: {{ detail.destination_address }}</p>
+                      <p *ngIf="detail.assets.length > 0">Assets:</p>
+                      <span *ngFor="let asset of detail.assets">
+                        <p>policy_id: {{ asset.policy_id }} </p>
+                        <p>Qty: {{ asset.quantity }} </p>
+                      </span>
+                    </span>
+                    </li>
+                  </ul>
+                  <p class="card-text"></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-12">
+              <div class="card">
+                <div class="card-header">
+                  Outcoming Transactions
+                </div>
+                <div class="card-body">
+                  
+                  <p class="card-text"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+<app-footer></app-footer>
