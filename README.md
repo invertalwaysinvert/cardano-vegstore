@@ -6,6 +6,7 @@
 # Cardano Veg Store 🌽
 Test of concept integration of Cardano wallet and e-commerce website. NodeJs, Angular 11. There are several things to consider in this project, so consider this as a reference, not a full fledge application. Some concerns about security must be addressed first and we can't be accountable for any misuse of the code. The intention of the pet project is to serve an educational purpose.
 
+![cardano veg store page](https://raw.githubusercontent.com/cheffNFT/cardano-vegstore/main/docs/homepage.png)
 
 # Description 💡
 Cardano Veg Store is a template project for e-commerce integration, it mains for simplicity and is not tied to proprietary technologies or platforms as much as possible.
