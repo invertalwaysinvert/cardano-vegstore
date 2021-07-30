@@ -23,6 +23,8 @@ import { AuthInterceptor } from './helpers/auth-interceptor'
 import { SessionStorage } from './helpers/session-storage';
 import { NetworkInformationComponent } from './member-area/network-information/network-information.component';
 import { AddressViewComponent } from './member-area/address-view/address-view.component';
+import { AddressListComponent } from './member-area/address-view/address-list.component';
+import { TransactionsComponent } from './member-area/transactions/transactions.component';
 
 
 @NgModule({
@@ -35,7 +37,9 @@ import { AddressViewComponent } from './member-area/address-view/address-view.co
     HeaderComponent,
     FooterComponent,
     NetworkInformationComponent,
-    AddressViewComponent
+    AddressViewComponent,
+    AddressListComponent,
+    TransactionsComponent
   ],
   imports: [
     BrowserModule,
